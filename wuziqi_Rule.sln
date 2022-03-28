@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.1525
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wuziqi_Rule", "wuziqi_Rule\wuziqi_Rule.vcxproj", "{87DDCC34-5EE4-4400-9958-AD2BE36B0BA9}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glChessBoard", "glChessBoard\glChessBoard.vcxproj", "{998F81B4-140C-4FDF-8DB7-7C8353BAEA63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{87DDCC34-5EE4-4400-9958-AD2BE36B0BA9}.Release|x64.Build.0 = Release|x64
 		{87DDCC34-5EE4-4400-9958-AD2BE36B0BA9}.Release|x86.ActiveCfg = Release|Win32
 		{87DDCC34-5EE4-4400-9958-AD2BE36B0BA9}.Release|x86.Build.0 = Release|Win32
+		{998F81B4-140C-4FDF-8DB7-7C8353BAEA63}.Debug|x64.ActiveCfg = Debug|x64
+		{998F81B4-140C-4FDF-8DB7-7C8353BAEA63}.Debug|x64.Build.0 = Debug|x64
+		{998F81B4-140C-4FDF-8DB7-7C8353BAEA63}.Debug|x86.ActiveCfg = Debug|Win32
+		{998F81B4-140C-4FDF-8DB7-7C8353BAEA63}.Debug|x86.Build.0 = Debug|Win32
+		{998F81B4-140C-4FDF-8DB7-7C8353BAEA63}.Release|x64.ActiveCfg = Release|x64
+		{998F81B4-140C-4FDF-8DB7-7C8353BAEA63}.Release|x64.Build.0 = Release|x64
+		{998F81B4-140C-4FDF-8DB7-7C8353BAEA63}.Release|x86.ActiveCfg = Release|Win32
+		{998F81B4-140C-4FDF-8DB7-7C8353BAEA63}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
