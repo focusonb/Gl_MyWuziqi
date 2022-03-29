@@ -1,0 +1,17 @@
+*
+!*.cpp
+!*.cc
+!*.c
+!*.hpp
+!*.h
+!*.sln
+!*.sheet
+!*.txt
+!*.ui
+!*.pro
+!*.props
+!*.jpg
+!*.png
+!*.filters
+!*.vcxproj
+!*/

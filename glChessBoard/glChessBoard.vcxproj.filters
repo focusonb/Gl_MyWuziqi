@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ShaderReader">
+      <UniqueIdentifier>{db51b37a-c6ca-4932-b158-a5f086e6e5c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderReader\FIleManager">
+      <UniqueIdentifier>{09742b03-5a9e-4013-9e63-feca5444777e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty">
+      <UniqueIdentifier>{3eec2bfb-d3f8-4c3d-abfd-71a13fa48787}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\Glad">
+      <UniqueIdentifier>{be38917e-b0d2-4821-8fa2-016ffd044b3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\Stb_image">
+      <UniqueIdentifier>{a48277f1-cc76-4f13-99a8-7d09a17d4494}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DrawBoard">
+      <UniqueIdentifier>{a21d079b-111b-4fb5-a313-eb4c13067131}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextureManager">
+      <UniqueIdentifier>{74e2836a-7bc8-4d11-86d7-db18dc0d8681}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GlfwConfigure">
+      <UniqueIdentifier>{34019260-33cc-429d-9027-7911f80f582d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CallBack">
+      <UniqueIdentifier>{f3f4cc04-498f-451f-b7f5-4b5ea54be194}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="shaderReader\MyShader.cpp">
+      <Filter>ShaderReader</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderReader\FIleManager\FileManagerControler.cpp">
+      <Filter>ShaderReader\FIleManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderReader\FIleManager\WFIleTextManager.cpp">
+      <Filter>ShaderReader\FIleManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdParty\Glad\glad.c">
+      <Filter>ThirdParty\Glad</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawBoard\BoardLocation.cpp">
+      <Filter>DrawBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawBoard\glSquarePainter.cpp">
+      <Filter>DrawBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager\TextureManager.cpp">
+      <Filter>TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GlfwConfigure\GlfwConfigure.cpp">
+      <Filter>GlfwConfigure</Filter>
+    </ClCompile>
+    <ClCompile Include="CallBack\callback.cpp">
+      <Filter>CallBack</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="myVertices.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="shaderReader\MyShader.h">
+      <Filter>ShaderReader</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderReader\FIleManager\FileManagerControler.h">
+      <Filter>ShaderReader\FIleManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderReader\FIleManager\WFIleTextManager.h">
+      <Filter>ShaderReader\FIleManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\Stb_image\stb_image.h">
+      <Filter>ThirdParty\Stb_image</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawBoard\BoardLocation.h">
+      <Filter>DrawBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawBoard\glSquarePainter.h">
+      <Filter>DrawBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager\TextureManager.h">
+      <Filter>TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GlfwConfigure\GlfwConfigure.h">
+      <Filter>GlfwConfigure</Filter>
+    </ClInclude>
+    <ClInclude Include="CallBack\callback.h">
+      <Filter>CallBack</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="glChessBoard.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
