@@ -12,6 +12,12 @@ extern float fov;
 extern glm::vec3 cameraFront;
 extern glm::vec3 cameraPos;
 extern glm::vec3 cameraUp;
+extern float deltaTime;	// Time between current frame and last frame
+extern float lastFrame; // Time of last frame
+extern float currentFrame;
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn);
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void processInput(GLFWwindow *window);
