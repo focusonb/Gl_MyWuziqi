@@ -1,10 +1,10 @@
 #include "glSquarePainter.h"
 #include <glad/glad.h>
 #include <glfw3.h>
-#include "callback.h"
+#include "../CallBack/callback.h"
 
-#include "MyShader.h"
-#include "TextureManager.h"
+#include "../ShaderReader/MyShader.h"
+#include "../TextureManager/TextureManager.h"
 
 
 static const char* vertextShaderPath = "shader/squareShader/vertextShaderSquareCenter.txt";
@@ -48,6 +48,7 @@ GlSquarePainter::GlSquarePainter()
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
 	}
+
 	MyShader myShader(vertextShaderPath, fragmentShaderPath);
 
 	MyShader myShader2(vertextShaderPath2, fragmentShaderPath2);

@@ -1,7 +1,7 @@
 #include "MyShader.h"
 #include <iostream>
 #include <glad/glad.h>
-#include "WFIleTextManager.h"
+#include "FIleManager/WFIleTextManager.h"
 
 MyShader::MyShader(const char * filePath, const char * filePath2, FIleTextManager type)
 	:m_ptr_controler(new FileManagerControler(type))

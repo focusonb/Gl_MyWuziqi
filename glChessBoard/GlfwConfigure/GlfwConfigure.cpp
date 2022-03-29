@@ -2,16 +2,11 @@
 #include <iostream>
 
 #include "GlfwConfigure.h"
-#include "callback.h"
+#include "../CallBack/callback.h"
 
 
 using std::cout;
 using std::endl;
-
-const int WINDOWS_HEIGHT = 900;
-const int WINDOWS_WIDTH = 1200;
-const int ViEW_HEIGHT = 900;
-const int ViEW_WIDTH = 1200;
 
 //extern void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
@@ -43,6 +38,7 @@ bool GlfwConfigure::run()
 		std::cout << "Failed to initialize GLAD" << std::endl;
 		return false;
 	}
+	glViewport(0, 0, VIEW_WIDTH, VIEW_HEIGHT);
 	return true;
 }
 

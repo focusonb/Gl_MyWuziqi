@@ -15,20 +15,16 @@
 #include <glm/gtc/type_ptr.hpp>
 
 //#include "WFileTextManager.h"
-#include "FileManagerControler.h"
-#include "MyShader.h"
+#include "ShaderReader/FIleManager/FileManagerControler.h"
+#include "ShaderReader/MyShader.h"
 #include "myVertices.h"
 
 
-#include "TextureManager.h"
-#include "callback.h"
-#include "GlfwConfigure.h"
-#include "glSquarePainter.h"
+#include "TextureManager/TextureManager.h"
+#include "CallBack/callback.h"
+#include "GlfwConfigure/GlfwConfigure.h"
+#include "DrawBoard/glSquarePainter.h"
 
-const int WINDOWS_HEIGHT = 900;
-const int WINDOWS_WIDTH = 1200;
-const int ViEW_HEIGHT = 900;
-const int ViEW_WIDTH = 1200;
 
 int main()
 {
@@ -36,7 +32,8 @@ int main()
 	GLFWwindow* window = myConfig->getGlfWindowHandle();
 
 	GlSquarePainter square;
-
 	square.draw(spgl::PointGl(1.0f, 1.0f), window);
+
+
 	return 0;
 }

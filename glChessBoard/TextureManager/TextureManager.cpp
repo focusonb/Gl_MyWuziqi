@@ -1,8 +1,7 @@
 #include "TextureManager.h"
 
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
-
+#include "../ThirdParty/Stb_image/stb_image.h"
 #include <iostream>
 
 //#include <glfw3.h>
