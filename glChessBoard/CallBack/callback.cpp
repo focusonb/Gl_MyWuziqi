@@ -69,7 +69,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-	glViewport(0, 0, width, width);
+	glViewport(0, 0, width, height);
 }
 
 void processInput(GLFWwindow *window)
