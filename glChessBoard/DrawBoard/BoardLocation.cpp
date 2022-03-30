@@ -1,8 +1,19 @@
 #include "BoardLocation.h"
 
-BoardLocation::BoardLocation(GlSize width, GlSize height, int widNum, int heiNUm)
+BoardLocation::BoardLocation(GlSize widthWindow, GlSize heightWindow, int widNum, int heiNum)
 {
+	m_width = widthWindow / (widNum + 4);
+	m_height = heightWindow / (heiNum + 4);
+	int posX = 0;
+	int posY = 0;
 
+	for (int i = 0; i < widNum; ++i) {
+		for (int j = 0; j < heiNum; ++j) {
+			posX = (i + 2)*m_width;
+			posY = (j + 2)*m_height;
+			m_loca.insert(pair< PointGl, PointInt>(PointGl(posX, posY), PointInt(i, j)));
+		}
+	}
 }
 
 bool BoardLocation::getChessPointGl(GlSize cursor_width, GlSize cursor_height, PointGl& point) const
@@ -54,7 +65,12 @@ bool BoardLocation::getChessPointInt(GlSize cursor_width, GlSize cursor_height, 
 	return true;
 }
 
-BoardLocation::MapLoca BoardLocation::getAllPoint()
+const GlSize BoardLocation::getWidth() const
+{
+	return m_width;
+}
+
+const BoardLocation::MapLoca BoardLocation::getAllPoint() const
 {
 	return m_loca;
 }

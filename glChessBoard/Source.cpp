@@ -13,8 +13,10 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <Windows.h>
+#include <iostream>
 
-//#include "WFileTextManager.h"
+
 #include "ShaderReader/FIleManager/FileManagerControler.h"
 #include "ShaderReader/MyShader.h"
 #include "myVertices.h"
@@ -24,29 +26,46 @@
 #include "CallBack/callback.h"
 #include "GlfwConfigure/GlfwConfigure.h"
 #include "DrawBoard/glSquarePainter.h"
+#include "DrawBoard/GlCirclePainter.h"
+#include <thread>
 
-
+using std::cout;
+using std::endl;
 int main()
 {
-	GlfwConfigure* myConfig = GlfwConfigure::getInstance();
-	GLFWwindow* window = myConfig->getGlfWindowHandle();
+	std::thread boardLoopRender([&]() {
+		GlfwConfigure* myConfig = GlfwConfigure::getInstance();
+		GLFWwindow* window = myConfig->getGlfWindowHandle();
 
-	GlSquarePainter square(pair<int,int>(0.000,0.000),800.000);
+		BoardLocation boardLoc(WINDOWS_WIDTH, WINDOWS_HEIGHT, 20, 20);
+		int width = boardLoc.getWidth();
+		BoardLocation::MapLoca mapLoca = boardLoc.getAllPoint();
 
-	while (!glfwWindowShouldClose(window))
-	{
-		processInput(window);
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		GlCirclePainter chessWhitePainter(pair<int,int>(0,0),400, CorlorChess::black);
+		GlCirclePainter chessBlackPainter(pair<int,int>(600,600),400, CorlorChess::white);
 
-		square.draw();
+		GlSquarePainter square;
+		for (auto it : mapLoca) {
+			square.addOne(it.first, width);
+		}
+		while (!glfwWindowShouldClose(window))
+		{
+			Sleep(30);
+			processInput(window);
+			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+			square.draw();
+			chessWhitePainter.draw();
+			chessBlackPainter.draw();
 
-		glfwSwapBuffers(window);
-		glfwPollEvents();
-	}
-	GlPainter::deleteVertexArrays();
-	GlPainter::deleteBuffers();
-	glfwTerminate();
+			glfwSwapBuffers(window);
+			glfwPollEvents();
+		}
+		GlPainter::deleteVertexArrays();
+		GlPainter::deleteBuffers();
+		glfwTerminate();
+	});
+	boardLoopRender.join();
 	return 0;
 }

@@ -38,7 +38,7 @@ bool GlfwConfigure::run()
 		std::cout << "Failed to initialize GLAD" << std::endl;
 		return false;
 	}
-	glViewport(0, 0, VIEW_WIDTH, VIEW_HEIGHT);
+
 	return true;
 }
 

@@ -72,6 +72,12 @@
     <ClCompile Include="CallBack\callback.cpp">
       <Filter>CallBack</Filter>
     </ClCompile>
+    <ClCompile Include="DrawBoard\GlCirclePainter.cpp">
+      <Filter>DrawBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawBoard\GlPainter.cpp">
+      <Filter>DrawBoard</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="myVertices.h">
@@ -106,6 +112,12 @@
     </ClInclude>
     <ClInclude Include="CallBack\callback.h">
       <Filter>CallBack</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawBoard\GlCirclePainter.h">
+      <Filter>DrawBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawBoard\GlPainter.h">
+      <Filter>DrawBoard</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
