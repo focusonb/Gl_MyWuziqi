@@ -78,6 +78,9 @@
     <ClCompile Include="DrawBoard\GlPainter.cpp">
       <Filter>DrawBoard</Filter>
     </ClCompile>
+    <ClCompile Include="DrawBoard\circleChessVerticeBuild.cpp">
+      <Filter>DrawBoard</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="myVertices.h">

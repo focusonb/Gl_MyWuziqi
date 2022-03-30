@@ -128,6 +128,7 @@
   <ItemGroup>
     <ClCompile Include="CallBack\callback.cpp" />
     <ClCompile Include="DrawBoard\BoardLocation.cpp" />
+    <ClCompile Include="DrawBoard\circleChessVerticeBuild.cpp" />
     <ClCompile Include="DrawBoard\GlCirclePainter.cpp" />
     <ClCompile Include="DrawBoard\GlPainter.cpp" />
     <ClCompile Include="DrawBoard\glSquarePainter.cpp" />
