@@ -127,6 +127,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CallBack\callback.cpp" />
+    <ClCompile Include="CallBack\mouse_click_callback.cpp" />
     <ClCompile Include="DrawBoard\BoardLocation.cpp" />
     <ClCompile Include="DrawBoard\circleChessVerticeBuild.cpp" />
     <ClCompile Include="DrawBoard\GlCirclePainter.cpp" />
@@ -142,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CallBack\callback.h" />
+    <ClInclude Include="CallBack\mouse_click_callback.h" />
     <ClInclude Include="DrawBoard\BoardLocation.h" />
     <ClInclude Include="DrawBoard\GlCirclePainter.h" />
     <ClInclude Include="DrawBoard\GlPainter.h" />

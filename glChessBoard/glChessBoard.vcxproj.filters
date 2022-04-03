@@ -81,6 +81,9 @@
     <ClCompile Include="DrawBoard\circleChessVerticeBuild.cpp">
       <Filter>DrawBoard</Filter>
     </ClCompile>
+    <ClCompile Include="CallBack\mouse_click_callback.cpp">
+      <Filter>CallBack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="myVertices.h">
@@ -121,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="DrawBoard\GlPainter.h">
       <Filter>DrawBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="CallBack\mouse_click_callback.h">
+      <Filter>CallBack</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

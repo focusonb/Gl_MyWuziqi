@@ -1,5 +1,9 @@
+#include "../DrawBoard/BoardLocation.h"
+#include "../DrawBoard/GlCirclePainter.h"
+
 #include "callback.h"
 
+//#include <iostream>
 
 glm::vec3 cameraFront(0.0, 0.0, -2.0);
 glm::vec3 cameraPos(0.0, 0.0, 1.0);
@@ -56,6 +60,7 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 	cameraFront = glm::normalize(front);
 }
 
+
 // glfw: whenever the mouse scroll wheel scrolls, this callback is called
 // ----------------------------------------------------------------------
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
@@ -69,6 +74,8 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
+	ptrBoardLoc->resize(width, height);
+	ptrChessWhitePainter->setWindowSize(width, height);
 	glViewport(0, 0, width, height);
 }
 

@@ -1,8 +1,9 @@
 #pragma once
-#include "BoardLocation.h"
-#include <list>
 #include <glad/glad.h>
+#include <list>
 #include <vector>
+
+#include "BoardLocation.h"
 #include "GlPainter.h"
 
 using std::list;

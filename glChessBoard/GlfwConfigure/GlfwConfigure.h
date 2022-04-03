@@ -1,8 +1,8 @@
 #pragma once
 extern struct GLFWwindow;
 
-static const int WINDOWS_WIDTH = 1200;
-static const int WINDOWS_HEIGHT = 1200;
+static const int WINDOWS_WIDTH = 1000;
+static const int WINDOWS_HEIGHT = 1000;
 static const int VIEW_WIDTH = 1200;
 static const int VIEW_HEIGHT = 1200;
 class GlfwConfigure

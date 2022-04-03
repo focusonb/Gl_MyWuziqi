@@ -19,10 +19,69 @@ static const char* texture = "texture1";
 static const char* MY_IMAGE_PATH_1 = "image/whiteChess.jpg";
 static const char* MY_IMAGE_PATH_2 = "image/blackChess.jpg";
 
+static const int verticesNum = 270;
+static const double circleVertices[verticesNum] = {
+1, 0, -0.3, 2, 0.939692,
+0.939692, 0.34202, -0.3, 1.87939, 0,
+0, 0, -0.3, 0, 0.939692,
+0.939692, 0.34202, -0.3, 1.87939, 0.766044,
+0.766044, 0.642788, -0.3, 1.53209, 0,
+0, 0, -0.3, 0, 0.766044,
+0.766044, 0.642788, -0.3, 1.53209, 0.5,
+0.5, 0.866026, -0.3, 1, 0,
+0, 0, -0.3, 0, 0.5,
+0.5, 0.866026, -0.3, 1, 0.173648,
+0.173648, 0.984808, -0.3, 0.347296, 0,
+0, 0, -0.3, 0, 0.173648,
+0.173648, 0.984808, -0.3, 0.347296, -0.173648,
+-0.173648, 0.984808, -0.3, -0.347296, 0,
+0, 0, -0.3, 0, -0.173648,
+-0.173648, 0.984808, -0.3, -0.347296, -0.5,
+-0.5, 0.866026, -0.3, -1, 0,
+0, 0, -0.3, 0, -0.5,
+-0.5, 0.866026, -0.3, -1, -0.766044,
+-0.766044, 0.642788, -0.3, -1.53209, 0,
+0, 0, -0.3, 0, -0.766044,
+-0.766044, 0.642788, -0.3, -1.53209, -0.939692,
+-0.939692, 0.34202, -0.3, -1.87939, 0,
+0, 0, -0.3, 0, -0.939692,
+-0.939692, 0.34202, -0.3, -1.87939, -1,
+-1, 5.35898e-08, -0.3, -2, 0,
+0, 0, -0.3, 0, -1,
+-1, 5.35898e-08, -0.3, -2, -0.939692,
+-0.939692, -0.34202, -0.3, -1.87939, 0,
+0, 0, -0.3, 0, -0.939692,
+-0.939692, -0.34202, -0.3, -1.87939, -0.766044,
+-0.766044, -0.642788, -0.3, -1.53209, 0,
+0, 0, -0.3, 0, -0.766044,
+-0.766044, -0.642788, -0.3, -1.53209, -0.5,
+-0.5, -0.866026, -0.3, -1, 0,
+0, 0, -0.3, 0, -0.5,
+-0.5, -0.866026, -0.3, -1, -0.173648,
+-0.173648, -0.984808, -0.3, -0.347296, 0,
+0, 0, -0.3, 0, -0.173648,
+-0.173648, -0.984808, -0.3, -0.347296, 0.173648,
+0.173648, -0.984808, -0.3, 0.347296, 0,
+0, 0, -0.3, 0, 0.173648,
+0.173648, -0.984808, -0.3, 0.347296, 0.5,
+0.5, -0.866026, -0.3, 1, 0,
+0, 0, -0.3, 0, 0.5,
+0.5, -0.866026, -0.3, 1, 0.766044,
+0.766044, -0.642788, -0.3, 1.53209, 0,
+0, 0, -0.3, 0, 0.766044,
+0.766044, -0.642788, -0.3, 1.53209, 0.939692,
+0.939692, -0.34202, -0.3, 1.87939, 0,
+0, 0, -0.3, 0, 0.939692,
+0.939692, -0.34202, -0.3, 1.87939, 1,
+1, 0, -0.3, 2, 0,
+0, 0, -0.3, 0, 4,
+};
 
 
 
-GlCirclePainter::GlCirclePainter(const PointGl& point, int width, CorlorChess color)
+
+GlCirclePainter::GlCirclePainter(const PointGl& point, int width, CorlorChess color, int widthWindow, int heightWindow)
+	:m_widthWindow(widthWindow), m_heightWindow(heightWindow)
 {
 	addOne(point, width);
 	if (configureShader(color) == false) {
@@ -45,11 +104,18 @@ void GlCirclePainter::draw() const
 
 }
 
+void GlCirclePainter::setWindowSize(int widthWindow, int heightWindow)
+{
+	m_widthWindow = widthWindow;
+	m_heightWindow = heightWindow;
+}
+
 void GlCirclePainter::addOne(const PointGl& point, int width)
 {
-	float k = WINDOWS_WIDTH / width;//shrink times
-	float offsetX = (2.000 * point.first / WINDOWS_WIDTH) - 1.000 + (1.000 / k);//offset in x direction
-	float offsetY = (2.000 * point.second / WINDOWS_HEIGHT) - 1.000 + (1.000 / k);//offset in y direction
+	float k = static_cast<float>(width) / static_cast<float>(m_widthWindow);
+	float offsetX = -1 + 2.0*static_cast<float>(point.first)/ static_cast<float>(m_widthWindow);
+	float offsetY = 1 - 2.0*static_cast<float>(point.second) / static_cast<float>(m_heightWindow);
+
 
 	volatile float tmp;
 	int index;
@@ -66,12 +132,12 @@ void GlCirclePainter::addOne(const PointGl& point, int width)
 			switch (j) {
 			case 0: {
 				tmp = tmpVertices[i * 5 + j];
-				tmpVertices[i * 5 + j] = tmp / k + offsetX;
+				tmpVertices[i * 5 + j] = tmp*k + offsetX;
 				break;
 			}
 			case 1: {
 				tmp = tmpVertices[i * 5 + j];
-				tmpVertices[i * 5 + j] = tmp / k + offsetY;
+				tmpVertices[i * 5 + j] = tmp*k + offsetY;
 				break;
 			}
 			}

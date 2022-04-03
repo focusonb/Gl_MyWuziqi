@@ -29,6 +29,10 @@
 #include "DrawBoard/GlCirclePainter.h"
 #include <thread>
 
+
+GlCirclePainter* ptrChessWhitePainter = nullptr;
+BoardLocation* ptrBoardLoc = nullptr;
+
 using std::cout;
 using std::endl;
 int main()
@@ -37,12 +41,14 @@ int main()
 		GlfwConfigure* myConfig = GlfwConfigure::getInstance();
 		GLFWwindow* window = myConfig->getGlfWindowHandle();
 
-		BoardLocation boardLoc(WINDOWS_WIDTH, WINDOWS_HEIGHT, 20, 20);
+		BoardLocation boardLoc(WINDOWS_WIDTH, WINDOWS_HEIGHT, 10, 10);
 		int width = boardLoc.getWidth();
 		BoardLocation::MapLoca mapLoca = boardLoc.getAllPoint();
+		ptrBoardLoc = &boardLoc;
 
-		GlCirclePainter chessWhitePainter(pair<int,int>(0,0),400, CorlorChess::black);
-		GlCirclePainter chessBlackPainter(pair<int,int>(600,600),400, CorlorChess::white);
+		GlCirclePainter chessWhitePainter(pair<int,int>(0,0), width, CorlorChess::black, WINDOWS_WIDTH, WINDOWS_HEIGHT);
+		GlCirclePainter chessBlackPainter(pair<int,int>(300,300), width, CorlorChess::white, WINDOWS_WIDTH, WINDOWS_HEIGHT);
+		ptrChessWhitePainter = &chessBlackPainter;
 
 		GlSquarePainter square;
 		for (auto it : mapLoca) {

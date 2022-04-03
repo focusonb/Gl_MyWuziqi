@@ -32,6 +32,7 @@ bool GlfwConfigure::run()
 	glfwSetCursorPosCallback(window, mouse_callback);
 	glfwSetScrollCallback(window, scroll_callback);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	glfwSetMouseButtonCallback(window, mouseClick_callback);
 	//load gl dynamic library
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{

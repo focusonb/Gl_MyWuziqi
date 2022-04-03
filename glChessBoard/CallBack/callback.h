@@ -15,9 +15,15 @@ extern glm::vec3 cameraUp;
 extern float deltaTime;	// Time between current frame and last frame
 extern float lastFrame; // Time of last frame
 extern float currentFrame;
+class BoardLocation;
+extern BoardLocation* ptrBoardLoc;
+class GlCirclePainter;
+extern GlCirclePainter* ptrChessWhitePainter;
+
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn);
+void mouseClick_callback(GLFWwindow* window,int button, int xposIn, int yposIn);
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
