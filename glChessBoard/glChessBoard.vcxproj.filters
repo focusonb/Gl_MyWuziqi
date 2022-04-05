@@ -84,6 +84,12 @@
     <ClCompile Include="CallBack\mouse_click_callback.cpp">
       <Filter>CallBack</Filter>
     </ClCompile>
+    <ClCompile Include="Rule\ChessMapData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Rule\WuziqiRule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="myVertices.h">
@@ -127,6 +133,12 @@
     </ClInclude>
     <ClInclude Include="CallBack\mouse_click_callback.h">
       <Filter>CallBack</Filter>
+    </ClInclude>
+    <ClInclude Include="Rule\ChessMapData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Rule\WuziqiRule.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

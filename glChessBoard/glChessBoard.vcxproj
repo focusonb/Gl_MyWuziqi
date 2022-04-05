@@ -134,6 +134,8 @@
     <ClCompile Include="DrawBoard\GlPainter.cpp" />
     <ClCompile Include="DrawBoard\glSquarePainter.cpp" />
     <ClCompile Include="GlfwConfigure\GlfwConfigure.cpp" />
+    <ClCompile Include="Rule\ChessMapData.cpp" />
+    <ClCompile Include="Rule\WuziqiRule.cpp" />
     <ClCompile Include="ShaderReader\FIleManager\FileManagerControler.cpp" />
     <ClCompile Include="ShaderReader\FIleManager\WFIleTextManager.cpp" />
     <ClCompile Include="shaderReader\MyShader.cpp" />
@@ -151,6 +153,8 @@
     <ClInclude Include="GlfwConfigure\GlfwConfigure.h" />
     <ClInclude Include="myVertices.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Rule\ChessMapData.h" />
+    <ClInclude Include="Rule\WuziqiRule.h" />
     <ClInclude Include="ShaderReader\FIleManager\FileManagerControler.h" />
     <ClInclude Include="ShaderReader\FIleManager\WFIleTextManager.h" />
     <ClInclude Include="shaderReader\MyShader.h" />

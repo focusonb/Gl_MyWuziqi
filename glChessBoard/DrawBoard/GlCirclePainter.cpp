@@ -78,7 +78,13 @@ static const double circleVertices[verticesNum] = {
 };
 
 
-
+GlCirclePainter::GlCirclePainter(int widthWindow, int heightWindow, CorlorChess color)
+	:m_widthWindow(widthWindow), m_heightWindow(heightWindow)
+{
+	if (configureShader(color) == false) {
+		cout << "configureShader failed" << endl;
+	};
+}
 
 GlCirclePainter::GlCirclePainter(const PointGl& point, int width, CorlorChess color, int widthWindow, int heightWindow)
 	:m_widthWindow(widthWindow), m_heightWindow(heightWindow)
@@ -87,7 +93,6 @@ GlCirclePainter::GlCirclePainter(const PointGl& point, int width, CorlorChess co
 	if (configureShader(color) == false) {
 		cout << "configureShader failed" << endl;
 	};
-
 }
 
 void GlCirclePainter::draw() const
@@ -104,7 +109,7 @@ void GlCirclePainter::draw() const
 
 }
 
-void GlCirclePainter::setWindowSize(int widthWindow, int heightWindow)
+void GlCirclePainter::setWindowSize(const int widthWindow, const int heightWindow)
 {
 	m_widthWindow = widthWindow;
 	m_heightWindow = heightWindow;

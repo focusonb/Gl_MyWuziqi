@@ -8,10 +8,10 @@ enum class CorlorChess { white,black};
 class GlCirclePainter : public GlPainter
 {
 public:
-	GlCirclePainter() = delete;
+	GlCirclePainter(int widthWindow, int heightWindow, CorlorChess color = CorlorChess::white);
 	GlCirclePainter(const PointGl& point, int width, CorlorChess color, int widthWindow, int heightWindow);
 	void draw() const override;
-	void setWindowSize(int widthWindow, int heightWindow);
+	void setWindowSize(const int widthWindow, const int heightWindow);
 	void setSize(const int& size) override {};
 	void addOne(const PointGl& point, int width);
 protected:

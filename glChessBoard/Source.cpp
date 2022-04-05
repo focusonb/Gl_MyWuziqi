@@ -27,16 +27,24 @@
 #include "GlfwConfigure/GlfwConfigure.h"
 #include "DrawBoard/glSquarePainter.h"
 #include "DrawBoard/GlCirclePainter.h"
+#include "Rule/WuziqiRule.h"
+#include "Rule/ChessMapData.h"
+
 #include <thread>
 
 
 GlCirclePainter* ptrChessWhitePainter = nullptr;
 BoardLocation* ptrBoardLoc = nullptr;
+ChessMapData* ptrChessMapData = nullptr;
 
 using std::cout;
 using std::endl;
 int main()
 {
+	//PlayRule<ChessMapData> chessRule;
+	ChessMapData chessMapData;
+	ptrChessMapData = &chessMapData;
+
 	std::thread boardLoopRender([&]() {
 		GlfwConfigure* myConfig = GlfwConfigure::getInstance();
 		GLFWwindow* window = myConfig->getGlfWindowHandle();
@@ -46,9 +54,10 @@ int main()
 		BoardLocation::MapLoca mapLoca = boardLoc.getAllPoint();
 		ptrBoardLoc = &boardLoc;
 
-		GlCirclePainter chessWhitePainter(pair<int,int>(0,0), width, CorlorChess::black, WINDOWS_WIDTH, WINDOWS_HEIGHT);
-		GlCirclePainter chessBlackPainter(pair<int,int>(300,300), width, CorlorChess::white, WINDOWS_WIDTH, WINDOWS_HEIGHT);
-		ptrChessWhitePainter = &chessBlackPainter;
+		GlCirclePainter chessWhitePainter(WINDOWS_WIDTH, WINDOWS_HEIGHT);
+		//GlCirclePainter chessWhitePainter(pair<int,int>(0,0), width, CorlorChess::white, WINDOWS_WIDTH, WINDOWS_HEIGHT);
+		//GlCirclePainter chessBlackPainter(pair<int,int>(300,300), width, CorlorChess::black, WINDOWS_WIDTH, WINDOWS_HEIGHT);
+		ptrChessWhitePainter = &chessWhitePainter;
 
 		GlSquarePainter square;
 		for (auto it : mapLoca) {
@@ -63,7 +72,7 @@ int main()
 
 			square.draw();
 			chessWhitePainter.draw();
-			chessBlackPainter.draw();
+			//chessBlackPainter.draw();
 
 			glfwSwapBuffers(window);
 			glfwPollEvents();

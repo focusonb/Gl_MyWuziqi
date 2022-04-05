@@ -17,7 +17,7 @@ BoardLocation::BoardLocation(GlSize widthWindow, GlSize heightWindow, int widNum
 	}
 }
 
-void BoardLocation::resize(GlSize widthWindow, GlSize heightWindow)
+void BoardLocation::resize(const GlSize widthWindow, const GlSize heightWindow)
 {
 	//float kWidth = static_cast<float>(widthWindow) / static_cast<float>(m_widthWindow);
 	//float kHeight = static_cast<float>(heightWindow) / static_cast<float>(m_heightWindow);
@@ -38,7 +38,7 @@ void BoardLocation::resize(GlSize widthWindow, GlSize heightWindow)
 	m_loca.swap(tmpLoca);
 }
 
-bool BoardLocation::getChessPointGl(GlSize cursorXPos, GlSize cursorYPos, PointGl& point) const
+bool BoardLocation::getChessPointGl(const GlSize cursorXPos, const GlSize cursorYPos, PointGl& point) const
 {
 	GlSize widOutput, heiOutput;
 	int widNum = static_cast<int>(cursorXPos / m_width);
@@ -68,20 +68,24 @@ bool BoardLocation::getChessPointGl(GlSize cursorXPos, GlSize cursorYPos, PointG
 
 }
 
-bool BoardLocation::getChessPointInt(GlSize cursor_width, GlSize cursor_height, PointInt & point) const
+bool BoardLocation::getChessPointInt(const GlSize cursor_width, const GlSize cursor_height, PointInt & point) const
 {
 	int widOutput, heiOutput;
 	int widNum = static_cast<int>(cursor_width / m_width);
 	GlSize nearestWidth = m_width * widNum;
 	GlSize pointDistenceWid = cursor_width - nearestWidth;
-	if (pointDistenceWid > 0.5* cursor_width)
+	if (widNum == 0)
+		return false;
+	if (pointDistenceWid > 0.5* m_width)
 		widOutput = 1 + widNum;
 	else
 		widOutput = widNum;
 	int heiNum = static_cast<int>(cursor_height / m_height);
 	GlSize nearestHeight = m_height * heiNum;
 	GlSize pointDistenceHei = cursor_height - nearestHeight;
-	if (pointDistenceHei > 0.5* cursor_height)
+	if (heiNum == 0)
+		return false;
+	if (pointDistenceHei > 0.5* m_height)
 		heiOutput = 1 + heiNum;
 	else
 		heiOutput = heiNum;

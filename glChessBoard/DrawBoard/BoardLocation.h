@@ -17,10 +17,10 @@ public:
 	using MapLoca = map<PointGl, PointInt>;
 	//widNUm is number of rows and collums of the board
 	BoardLocation(GlSize widthWindow, GlSize heightWindow, int widNum,int heiNUm);
-	void resize(GlSize widthWindow, GlSize heightWindow);
+	void resize(const GlSize widthWindow, const GlSize heightWindow);
 
-	bool getChessPointGl(GlSize cursorXPos, GlSize cursorYPos, PointGl& point) const;
-	bool getChessPointInt(GlSize cursorXPos, GlSize cursorYPos, PointInt& point) const;
+	bool getChessPointGl(const GlSize cursorXPos, const GlSize cursorYPos, PointGl& point) const;
+	bool getChessPointInt(const GlSize cursorXPos, const GlSize cursorYPos, PointInt& point) const;
 	const GlSize getWidth() const;
 	const MapLoca getAllPoint() const;
 
