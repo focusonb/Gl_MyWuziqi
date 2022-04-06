@@ -1,48 +1,43 @@
 #include "mouse_click_callback.h"
-#include "../DrawBoard/BoardLocation.h"
-#include "../DrawBoard/GlCirclePainter.h"
-#include "../Rule/ChessMapData.h"
-
-#include "../Rule/WuziqiRule.h"
-
+#include "../DrawBoard/PlayChessHandle.h"
+#include "PosEvent.h"
+#include "../header/Header.h"
 
 #include <glfw3.h>
 #include <iostream>
+
+#include <chrono>
+using std::chrono::high_resolution_clock;
+using std::chrono::duration_cast;
+using std::chrono::microseconds;
+
+PosEvent posEvent;
+
+
 using std::cout;
 using std::endl;
 
-void addNewChessAtCurPos(GLFWwindow * window) {
-	double xpos, ypos;
-	glfwGetCursorPos(window, &xpos, &ypos);
 
-	PointGl ChessCoor;
-	BoardLocation::PointInt ChessSeq;
-	int color = 1;
-
-	if (ptrBoardLoc->getChessPointGl(xpos, ypos, ChessCoor) == false) {
-		cout << "get chess location in window size failed" << endl;
-		return;
-	};
-	if (ptrBoardLoc->getChessPointInt(xpos, ypos, ChessSeq) == false) {
-		cout << "get chess sequence failed" << endl;
-		return;
-	};
-
-	int width = ptrBoardLoc->getWidth();
-	ptrChessWhitePainter->addOne(ChessCoor, width);//draw new chess
-
-	ChessMapData::SigleChessData sigleChessData(ChessSeq, color);
-	ptrChessMapData->addNewChess(sigleChessData);//add new chess message into data
-
-	//check if its win
-	PlayRule<ChessMapData> rule(*ptrChessMapData);
-	SigleChessLocation sigleChessLocation(ChessSeq);
-	cout << rule.isWin(sigleChessLocation,5) << endl;
-}
 
 void mouseClick_callback(GLFWwindow * window, int button, int xposIn, int yposIn)
 {
 	if (button == GLFW_MOUSE_BUTTON_LEFT) {
-		addNewChessAtCurPos(window);
+		auto start = high_resolution_clock::now();
+
+		double xPos, yPos;
+		glfwGetCursorPos(window, &xPos, &yPos);
+
+		PlayRule<ChessMapData> rule;
+		PlayChessHandle playChessHandle(ptrChessWhitePainter, ptrBoardLoc, ptrChessMapData);
+		playChessHandle(window, xPos, yPos, rule);
+
+		posEvent.send(rule);
+		//posEvent();
+
+		auto stop = high_resolution_clock::now();
+		auto duration = duration_cast<microseconds>(stop - start);
+		cout << duration.count() << endl;
 	}
+
 }
+

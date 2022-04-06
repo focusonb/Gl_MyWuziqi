@@ -128,11 +128,13 @@
   <ItemGroup>
     <ClCompile Include="CallBack\callback.cpp" />
     <ClCompile Include="CallBack\mouse_click_callback.cpp" />
+    <ClCompile Include="CallBack\PosEvent.cpp" />
     <ClCompile Include="DrawBoard\BoardLocation.cpp" />
     <ClCompile Include="DrawBoard\circleChessVerticeBuild.cpp" />
     <ClCompile Include="DrawBoard\GlCirclePainter.cpp" />
     <ClCompile Include="DrawBoard\GlPainter.cpp" />
     <ClCompile Include="DrawBoard\glSquarePainter.cpp" />
+    <ClCompile Include="DrawBoard\PlayChessHandle.cpp" />
     <ClCompile Include="GlfwConfigure\GlfwConfigure.cpp" />
     <ClCompile Include="Rule\ChessMapData.cpp" />
     <ClCompile Include="Rule\WuziqiRule.cpp" />
@@ -146,11 +148,14 @@
   <ItemGroup>
     <ClInclude Include="CallBack\callback.h" />
     <ClInclude Include="CallBack\mouse_click_callback.h" />
+    <ClInclude Include="CallBack\PosEvent.h" />
     <ClInclude Include="DrawBoard\BoardLocation.h" />
     <ClInclude Include="DrawBoard\GlCirclePainter.h" />
     <ClInclude Include="DrawBoard\GlPainter.h" />
     <ClInclude Include="DrawBoard\glSquarePainter.h" />
+    <ClInclude Include="DrawBoard\PlayChessHandle.h" />
     <ClInclude Include="GlfwConfigure\GlfwConfigure.h" />
+    <ClInclude Include="header\Header.h" />
     <ClInclude Include="myVertices.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Rule\ChessMapData.h" />

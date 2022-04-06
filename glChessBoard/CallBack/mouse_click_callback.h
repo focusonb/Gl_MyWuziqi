@@ -1,9 +1,6 @@
 #pragma once
 #include "../DrawBoard/BoardLocation.h"
-class GlCirclePainter;
-extern GlCirclePainter* ptrChessWhitePainter;
 
-extern BoardLocation* ptrBoardLoc;
+class PosEvent;
+extern PosEvent posEvent;
 
-class ChessMapData;
-extern ChessMapData* ptrChessMapData;

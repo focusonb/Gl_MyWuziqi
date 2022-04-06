@@ -54,8 +54,8 @@ ChessMapData::ChessColor ChessMapData::getColor(const ChessLocation & loca) cons
 void ChessMapData::addNewChess(const SigleChessData & sigleChessData)
 {
 	//auto loca = sigleChessData.first;
-	//auto interator = m_chessData.find(loca);
-	//if (interator == m_chessData.end())
+	//auto interator = m_chessData->find(loca);
+	//if (interator == m_chessData->end())
 	//	return;
 	//interator->second = sigleChessData.second;
 	m_chessData.insert(sigleChessData);

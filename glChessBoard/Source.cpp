@@ -29,6 +29,8 @@
 #include "DrawBoard/GlCirclePainter.h"
 #include "Rule/WuziqiRule.h"
 #include "Rule/ChessMapData.h"
+#include "CallBack/mouse_click_callback.h"
+#include "CallBack/PosEvent.h"
 
 #include <thread>
 
@@ -44,6 +46,9 @@ int main()
 	//PlayRule<ChessMapData> chessRule;
 	ChessMapData chessMapData;
 	ptrChessMapData = &chessMapData;
+
+	std::thread analyze(&PosEvent::handle, &posEvent);
+	//std::thread analyze(posEvent,&posEvent);
 
 	std::thread boardLoopRender([&]() {
 		GlfwConfigure* myConfig = GlfwConfigure::getInstance();
@@ -82,5 +87,6 @@ int main()
 		glfwTerminate();
 	});
 	boardLoopRender.join();
+	analyze.join();
 	return 0;
 }
