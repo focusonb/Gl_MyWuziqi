@@ -14,4 +14,7 @@
 !*.png
 !*.filters
 !*.vcxproj
+!*.lib
+!*.inl
+!*.rc
 !*/
