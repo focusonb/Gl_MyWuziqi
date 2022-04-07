@@ -1,6 +1,5 @@
 #pragma once
 #include "../DrawBoard/BoardLocation.h"
+struct GLFWwindow;
 
-class PosEvent;
-extern PosEvent posEvent;
-
+bool handlePos(GLFWwindow * window, double xPos, double yPos);

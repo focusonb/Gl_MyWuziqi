@@ -13,5 +13,6 @@ bool PosMessage::readUnit(MessageUnit& unit)
 void PosMessage::writeUnit(MessageUnit& unit)
 {
 	std::lock_guard<mutex> lc(m_mutex);
-	m_messageDeque.push_back(MessageUnit(std::move(unit)));
+	m_messageDeque.push_back(unit);
+	//m_messageDeque.push_back(std::move(unit));
 }

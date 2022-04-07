@@ -32,8 +32,10 @@ public:
 		while (1) {
 			Sleep(200);
 			PosMessage::MessageUnit unit;
-			if (m_PosMessage.readUnit(unit) == false)
+			if (m_PosMessage.readUnit(unit) == false) {
+				Sleep(200);
 				continue;
+			}
 			cout << unit.isWin() << endl;
 		}
 	};

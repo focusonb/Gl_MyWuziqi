@@ -33,11 +33,14 @@
 #include "CallBack/PosEvent.h"
 
 #include <thread>
+namespace sh {
+	BoardLocation* ptrBoardLoc;
+	GlCirclePainter* ptrChessWhitePainter;
+	GlCirclePainter* ptrChessBlackPainter;
 
-
-GlCirclePainter* ptrChessWhitePainter = nullptr;
-BoardLocation* ptrBoardLoc = nullptr;
-ChessMapData* ptrChessMapData = nullptr;
+	PosEvent posEvent;
+	PlayChessHandle playChessHandle;
+}
 
 using std::cout;
 using std::endl;
@@ -45,9 +48,10 @@ int main()
 {
 	//PlayRule<ChessMapData> chessRule;
 	ChessMapData chessMapData;
-	ptrChessMapData = &chessMapData;
+	sh::playChessHandle.setMapData(&chessMapData);
 
-	std::thread analyze(&PosEvent::handle, &posEvent);
+
+	std::thread analyze(&PosEvent::handle, &sh::posEvent);
 	//std::thread analyze(posEvent,&posEvent);
 
 	std::thread boardLoopRender([&]() {
@@ -57,12 +61,17 @@ int main()
 		BoardLocation boardLoc(WINDOWS_WIDTH, WINDOWS_HEIGHT, 10, 10);
 		int width = boardLoc.getWidth();
 		BoardLocation::MapLoca mapLoca = boardLoc.getAllPoint();
-		ptrBoardLoc = &boardLoc;
+
+		sh::playChessHandle.setBoardLocation(&boardLoc);
+		sh::ptrBoardLoc = &boardLoc;
 
 		GlCirclePainter chessWhitePainter(WINDOWS_WIDTH, WINDOWS_HEIGHT);
-		//GlCirclePainter chessWhitePainter(pair<int,int>(0,0), width, CorlorChess::white, WINDOWS_WIDTH, WINDOWS_HEIGHT);
-		//GlCirclePainter chessBlackPainter(pair<int,int>(300,300), width, CorlorChess::black, WINDOWS_WIDTH, WINDOWS_HEIGHT);
-		ptrChessWhitePainter = &chessWhitePainter;
+		GlCirclePainter chessBlackPainter(WINDOWS_WIDTH, WINDOWS_HEIGHT, CorlorChess::black);
+
+		sh::playChessHandle.setWhitePainter(&chessWhitePainter);
+		sh::playChessHandle.setBlackPainter(&chessBlackPainter);
+		sh::ptrChessWhitePainter = &chessWhitePainter;
+		sh::ptrChessBlackPainter = &chessBlackPainter;
 
 		GlSquarePainter square;
 		for (auto it : mapLoca) {

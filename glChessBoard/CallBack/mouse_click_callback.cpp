@@ -11,11 +11,11 @@ using std::chrono::high_resolution_clock;
 using std::chrono::duration_cast;
 using std::chrono::microseconds;
 
-PosEvent posEvent;
-
 
 using std::cout;
 using std::endl;
+//using namespace sh;
+
 
 
 
@@ -27,13 +27,9 @@ void mouseClick_callback(GLFWwindow * window, int button, int xposIn, int yposIn
 		double xPos, yPos;
 		glfwGetCursorPos(window, &xPos, &yPos);
 
-		PlayRule<ChessMapData> rule;
-		PlayChessHandle playChessHandle(ptrChessWhitePainter, ptrBoardLoc, ptrChessMapData);
-		playChessHandle(window, xPos, yPos, rule);
-
-		posEvent.send(rule);
-		//posEvent();
-
+		if (handlePos(window, xPos, yPos) == false) {
+			return;
+		}
 		auto stop = high_resolution_clock::now();
 		auto duration = duration_cast<microseconds>(stop - start);
 		cout << duration.count() << endl;
@@ -41,3 +37,10 @@ void mouseClick_callback(GLFWwindow * window, int button, int xposIn, int yposIn
 
 }
 
+bool handlePos(GLFWwindow * window, double xPos, double yPos) {
+	PlayRule<ChessMapData> rule;
+	if (sh::playChessHandle(window, xPos, yPos, rule) == false)
+		return false;
+	sh::posEvent.send(rule);
+	return true;
+}

@@ -3,6 +3,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glfw3.h>
+#include "../header/Header.h"
 extern bool firstMouse;
 extern float lastX;
 extern float lastY;
@@ -15,10 +16,6 @@ extern glm::vec3 cameraUp;
 extern float deltaTime;	// Time between current frame and last frame
 extern float lastFrame; // Time of last frame
 extern float currentFrame;
-class BoardLocation;
-extern BoardLocation* ptrBoardLoc;
-class GlCirclePainter;
-extern GlCirclePainter* ptrChessWhitePainter;
 
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);

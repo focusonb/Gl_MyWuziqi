@@ -74,8 +74,9 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-	ptrBoardLoc->resize(width, height);
-	ptrChessWhitePainter->setWindowSize(width, height);
+	sh::ptrBoardLoc->resize(width, height);
+	sh::ptrChessWhitePainter->setWindowSize(width, height);
+	sh::ptrChessBlackPainter->setWindowSize(width, height);
 	glViewport(0, 0, width, height);
 }
 

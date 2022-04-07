@@ -11,6 +11,11 @@ class PlayRule
 	using ChessColor = typename DataType::ChessColor;
 public:
 	PlayRule() {};
+	PlayRule(const PlayRule&playRule)
+		:m_chessData(new DataType(*(playRule.m_chessData)))
+		, m_currentChess (new ChessData(*(playRule.m_currentChess)))
+		, m_max (playRule.m_max){}
+
 	PlayRule(PlayRule&&playRule)
 		:m_chessData(playRule.m_chessData)
 		, m_currentChess(playRule.m_currentChess)
@@ -32,7 +37,9 @@ public:
 		playRule.m_chessData = nullptr;
 		playRule.m_currentChess = nullptr;
 	}
-	//void addNewChess(ChessData chessLocation) { m_chessData->addNewChess(chessLocation); };
+	bool isEmpty() {
+		return (m_chessData == nullptr || m_currentChess == nullptr);
+	}
 
 	bool isWin()const {
 		return isWin(*m_currentChess, m_max);

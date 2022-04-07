@@ -141,6 +141,9 @@
     <ClCompile Include="ShaderReader\FIleManager\FileManagerControler.cpp" />
     <ClCompile Include="ShaderReader\FIleManager\WFIleTextManager.cpp" />
     <ClCompile Include="shaderReader\MyShader.cpp" />
+    <ClCompile Include="socket\CommonFunction.cpp" />
+    <ClCompile Include="socket\socketManager.cpp" />
+    <ClCompile Include="socket\socketMediator.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="TextureManager\TextureManager.cpp" />
     <ClCompile Include="ThirdParty\Glad\glad.c" />
@@ -163,6 +166,9 @@
     <ClInclude Include="ShaderReader\FIleManager\FileManagerControler.h" />
     <ClInclude Include="ShaderReader\FIleManager\WFIleTextManager.h" />
     <ClInclude Include="shaderReader\MyShader.h" />
+    <ClInclude Include="socket\CommonFunction.h" />
+    <ClInclude Include="socket\socketManager.h" />
+    <ClInclude Include="socket\socketMediator.h" />
     <ClInclude Include="TextureManager\TextureManager.h" />
     <ClInclude Include="ThirdParty\Stb_image\stb_image.h" />
   </ItemGroup>
