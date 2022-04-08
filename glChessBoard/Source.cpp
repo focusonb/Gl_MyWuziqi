@@ -37,6 +37,7 @@ namespace sh {
 	BoardLocation* ptrBoardLoc;
 	GlCirclePainter* ptrChessWhitePainter;
 	GlCirclePainter* ptrChessBlackPainter;
+	int chessCorlor;
 
 	PosEvent posEvent;
 	PlayChessHandle playChessHandle;
@@ -73,6 +74,8 @@ int main()
 		sh::ptrChessWhitePainter = &chessWhitePainter;
 		sh::ptrChessBlackPainter = &chessBlackPainter;
 
+		sh::chessCorlor = 2;//black chess;
+
 		GlSquarePainter square;
 		for (auto it : mapLoca) {
 			square.addOne(it.first, width);
@@ -86,7 +89,7 @@ int main()
 
 			square.draw();
 			chessWhitePainter.draw();
-			//chessBlackPainter.draw();
+			chessBlackPainter.draw();
 
 			glfwSwapBuffers(window);
 			glfwPollEvents();

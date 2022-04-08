@@ -13,6 +13,7 @@ using std::deque;
 using std::mutex;
 
 struct GLFWwindow;
+
 class PosMessage {
 public:
 	using MessageUnit = PlayRule<ChessMapData>;

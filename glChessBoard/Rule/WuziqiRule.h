@@ -10,7 +10,7 @@ class PlayRule
 	using ChessLocation = typename DataType::ChessLocation;
 	using ChessColor = typename DataType::ChessColor;
 public:
-	PlayRule() {};
+	PlayRule():m_chessData(nullptr), m_currentChess(nullptr){};
 	PlayRule(const PlayRule&playRule)
 		:m_chessData(new DataType(*(playRule.m_chessData)))
 		, m_currentChess (new ChessData(*(playRule.m_currentChess)))

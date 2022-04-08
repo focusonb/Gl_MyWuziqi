@@ -21,6 +21,7 @@ public:
 
 	bool getChessPointGl(const GlSize cursorXPos, const GlSize cursorYPos, PointGl& point) const;
 	bool getChessPointInt(const GlSize cursorXPos, const GlSize cursorYPos, PointInt& point) const;
+	
 	const GlSize getWidth() const;
 	const MapLoca getAllPoint() const;
 

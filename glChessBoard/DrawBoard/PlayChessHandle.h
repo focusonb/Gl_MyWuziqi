@@ -7,6 +7,12 @@
 //extern GlCirclePainter* ptrChessWhitePainter;
 //extern BoardLocation* ptrBoardLoc;
 //extern ChessMapData* ptrChessMapData;
+struct EventMessage {
+	using ChessCorlor = int;
+	using MessageUnit = PlayRule<ChessMapData>;
+	ChessCorlor m_corlor;
+	MessageUnit m_rule;
+};
 
 class PlayChessHandle {
 public:
@@ -14,11 +20,11 @@ public:
 	PlayChessHandle(GlCirclePainter* painter, BoardLocation* loca, ChessMapData*data)
 		:m_ptrChessWhitePainter(painter), m_ptrBoardLoc(loca), m_ptrChessMapData(data){};
 
-	bool operator()(GLFWwindow * window, const double& xpos, const double& ypos, PlayRule<ChessMapData>& playRule) {
+	bool operator()(GLFWwindow * window, const double& xpos, const double& ypos, EventMessage* message) {
 
 		PointGl ChessCoor;
 		BoardLocation::PointInt ChessSeq;
-		int color = 1;
+		int& color = message->m_corlor;
 
 		if (m_ptrBoardLoc->getChessPointGl(xpos, ypos, ChessCoor) == false) {
 			cout << "get chess location in window size failed" << endl;
@@ -28,9 +34,21 @@ public:
 			cout << "get chess sequence failed" << endl;
 			return false;
 		};
+		if (m_ptrChessMapData->getColor(ChessSeq) != 0) {
+			return false;
+		}
 
 		int width = m_ptrBoardLoc->getWidth();
-		m_ptrChessWhitePainter->addOne(ChessCoor, width);//draw new chess
+		switch (color) {
+		case 1: {
+			m_ptrChessWhitePainter->addOne(ChessCoor, width);//draw new chess
+			break;
+		}
+		case 2: {
+			m_ptrChessBlackPainter->addOne(ChessCoor, width);//draw new chess
+			break;
+		}
+		}
 
 		ChessMapData::SigleChessData sigleChessData(ChessSeq, color);
 		m_ptrChessMapData->addNewChess(sigleChessData);//add new chess message into data
@@ -39,7 +57,7 @@ public:
 		SigleChessLocation sigleChessLocation(ChessSeq);
 		PlayRule<ChessMapData> rule(*m_ptrChessMapData, sigleChessLocation, 5);
 		//cout << rule.isWin() << endl;
-		playRule = std::move(rule);
+		message->m_rule = std::move(rule);
 		return true;
 
 	};

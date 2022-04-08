@@ -19,6 +19,7 @@ namespace sh {
 	extern GlCirclePainter* ptrChessWhitePainter;
 	extern GlCirclePainter* ptrChessBlackPainter;
 	extern BoardLocation* ptrBoardLoc;
+	extern int chessCorlor;
 }
 
 //namespace sh;

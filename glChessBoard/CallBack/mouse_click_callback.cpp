@@ -18,12 +18,14 @@ using std::endl;
 
 
 
-
 void mouseClick_callback(GLFWwindow * window, int button, int xposIn, int yposIn)
 {
 	if (button == GLFW_MOUSE_BUTTON_LEFT) {
 		auto start = high_resolution_clock::now();
-
+		//cout << xposIn << "  " << yposIn << endl;
+		if (xposIn == 1) {
+			return;
+		}
 		double xPos, yPos;
 		glfwGetCursorPos(window, &xPos, &yPos);
 
@@ -38,9 +40,22 @@ void mouseClick_callback(GLFWwindow * window, int button, int xposIn, int yposIn
 }
 
 bool handlePos(GLFWwindow * window, double xPos, double yPos) {
-	PlayRule<ChessMapData> rule;
-	if (sh::playChessHandle(window, xPos, yPos, rule) == false)
+	EventMessage message;
+	message.m_corlor = sh::chessCorlor;
+	if (sh::playChessHandle(window, xPos, yPos, &message) == false)
 		return false;
-	sh::posEvent.send(rule);
+	sh::posEvent.send(message.m_rule);
+
+	switch (sh::chessCorlor) {
+	case 1: {
+		sh::chessCorlor = 2;
+		break;
+	}
+	case 2: {
+		sh::chessCorlor = 1;
+		break;
+	}
+	}
+
 	return true;
 }
