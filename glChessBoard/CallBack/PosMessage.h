@@ -23,23 +23,3 @@ private:
 	deque<MessageUnit> m_messageDeque;
 	mutex m_mutex;
 };
-
-class PosEvent {
-public:
-	void send(PosMessage::MessageUnit& unit) {
-		m_PosMessage.writeUnit(unit);
-	};
-	void handle() {
-		while (1) {
-			Sleep(200);
-			PosMessage::MessageUnit unit;
-			if (m_PosMessage.readUnit(unit) == false) {
-				Sleep(200);
-				continue;
-			}
-			cout << unit.isWin() << endl;
-		}
-	};
-private:
-	PosMessage m_PosMessage;
-};

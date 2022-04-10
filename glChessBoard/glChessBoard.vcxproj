@@ -130,7 +130,7 @@
   <ItemGroup>
     <ClCompile Include="CallBack\callback.cpp" />
     <ClCompile Include="CallBack\mouse_click_callback.cpp" />
-    <ClCompile Include="CallBack\PosEvent.cpp" />
+    <ClCompile Include="CallBack\PosMessage.cpp" />
     <ClCompile Include="DrawBoard\BoardLocation.cpp" />
     <ClCompile Include="DrawBoard\circleChessVerticeBuild.cpp" />
     <ClCompile Include="DrawBoard\GlCirclePainter.cpp" />
@@ -153,12 +153,13 @@
   <ItemGroup>
     <ClInclude Include="CallBack\callback.h" />
     <ClInclude Include="CallBack\mouse_click_callback.h" />
-    <ClInclude Include="CallBack\PosEvent.h" />
+    <ClInclude Include="CallBack\PosMessage.h" />
     <ClInclude Include="DrawBoard\BoardLocation.h" />
     <ClInclude Include="DrawBoard\GlCirclePainter.h" />
     <ClInclude Include="DrawBoard\GlPainter.h" />
     <ClInclude Include="DrawBoard\glSquarePainter.h" />
     <ClInclude Include="DrawBoard\PlayChessHandle.h" />
+    <ClInclude Include="eventHandle\ruleHandle.h" />
     <ClInclude Include="GlfwConfigure\GlfwConfigure.h" />
     <ClInclude Include="header\Header.h" />
     <ClInclude Include="myVertices.h" />
@@ -172,6 +173,8 @@
     <ClInclude Include="socket\socketManager.h" />
     <ClInclude Include="socket\socketMediator.h" />
     <ClInclude Include="TextureManager\TextureManager.h" />
+    <ClInclude Include="ThirdParty\event\szcolored.h" />
+    <ClInclude Include="ThirdParty\event\szevent.h" />
     <ClInclude Include="ThirdParty\Stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>

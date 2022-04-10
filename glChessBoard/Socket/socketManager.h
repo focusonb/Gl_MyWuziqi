@@ -3,9 +3,17 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <WinSock2.h>
+#include <string>
+#include <list>
+#include <mutex>
+//#include <thread>
 
-class SocketMediator;
-class SocketThread
+using std::list;
+using std::string;
+using std::mutex;
+using std::lock_guard;
+
+class SocketManager
 {
 private:
 	SOCKADDR_IN loopAdr, clntAdr, servAdr;
@@ -13,23 +21,27 @@ private:
 	SOCKET hServSock;
 	WSAEVENT newEvent;
 	WSANETWORKEVENTS netevent;
-	char msg[100];
+	char* msg;
+	list<string> m_buffer;
+	mutex m_mtx;
 	bool stopwait = true;
+	volatile bool m_connection;
 
 public:
-	SocketThread() = delete;
-	SocketThread(SocketMediator* mediator, ADDRESS_FAMILY sin_family = AF_INET,
-		u_long address = 0x7f000001, 
-		const char* port = "8198");
-	~SocketThread() {
-		delete _mediator;
+	SocketManager():msg(new char[1000]), m_connection(true){};
+	bool buidConnection(ADDRESS_FAMILY sin_family,
+		u_long address, 
+		const char* port);
+	~SocketManager() {
+		delete msg;
 	};
-	void sendData(const char* msg);//input
-	void reactToMessage(const char* msg, SocketMediator* mediator);//output
+	void sendMessage(const char* msg);//input
+	void close() { m_connection = false; }
+	list<string> readBuffer();
 private:
-	void looprecvsend(SOCKET&sock, WSAEVENT&event, WSANETWORKEVENTS&netevent, char*msg, int size);
+	void looprecvsend();
+	void writeBuffer(char* message);
 	SOCKET& getsocket();
 	SOCKADDR_IN getClient();
 
-	SocketMediator* _mediator;//custom interface
 };

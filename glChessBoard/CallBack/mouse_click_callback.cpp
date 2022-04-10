@@ -1,7 +1,9 @@
 #include "mouse_click_callback.h"
 #include "../DrawBoard/PlayChessHandle.h"
-#include "PosEvent.h"
+#include "PosMessage.h"
 #include "../header/Header.h"
+#include "../ThirdParty/event/szevent.h"
+#include "../ThirdParty/event/szcolored.h"
 
 #include <glfw3.h>
 #include <iostream>
@@ -16,7 +18,8 @@ using std::cout;
 using std::endl;
 //using namespace sh;
 
-
+extern sz::event<PosMessage::MessageUnit> ruleEvnet;
+extern sz::event<GLFWwindow *, double, double> drawChessEvent;
 
 void mouseClick_callback(GLFWwindow * window, int button, int xposIn, int yposIn)
 {
@@ -29,14 +32,12 @@ void mouseClick_callback(GLFWwindow * window, int button, int xposIn, int yposIn
 		double xPos, yPos;
 		glfwGetCursorPos(window, &xPos, &yPos);
 
-		if (handlePos(window, xPos, yPos) == false) {
-			return;
-		}
+		drawChessEvent(window, xPos, yPos);
+
 		auto stop = high_resolution_clock::now();
 		auto duration = duration_cast<microseconds>(stop - start);
 		cout << duration.count() << endl;
 	}
-
 }
 
 bool handlePos(GLFWwindow * window, double xPos, double yPos) {
@@ -44,8 +45,10 @@ bool handlePos(GLFWwindow * window, double xPos, double yPos) {
 	message.m_corlor = sh::chessCorlor;
 	if (sh::playChessHandle(window, xPos, yPos, &message) == false)
 		return false;
-	sh::posEvent.send(message.m_rule);
+	ruleEvnet.call_async(message.m_rule);
 
+
+	//test
 	switch (sh::chessCorlor) {
 	case 1: {
 		sh::chessCorlor = 2;

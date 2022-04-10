@@ -1,4 +1,4 @@
-#include "PosEvent.h"
+#include "PosMessage.h"
 
 bool PosMessage::readUnit(MessageUnit& unit)
 {

@@ -93,9 +93,6 @@
     <ClCompile Include="DrawBoard\PlayChessHandle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CallBack\PosEvent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="socket\CommonFunction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -103,6 +100,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="socket\socketMediator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CallBack\PosMessage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -161,9 +161,6 @@
     <ClInclude Include="header\Header.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CallBack\PosEvent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="socket\CommonFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -171,6 +168,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="socket\socketMediator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\event\szcolored.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\event\szevent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CallBack\PosMessage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eventHandle\ruleHandle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -8,12 +8,12 @@
 
 using std::string;
 
-SocketThread::SocketThread(SocketMediator* mediator, ADDRESS_FAMILY sin_family, u_long address, const char* port)
+bool SocketManager::buidConnection( ADDRESS_FAMILY sin_family, u_long address, const char* port)
 {
-	_mediator = mediator->clone();
 	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
 	{
 		ErrorHandling("WSAStartup() error!");
+		return false;
 	}
 	hServSock = socket(PF_INET, SOCK_STREAM, 0);
 	memset(&servAdr, 0, sizeof(servAdr));
@@ -30,7 +30,7 @@ SocketThread::SocketThread(SocketMediator* mediator, ADDRESS_FAMILY sin_family, 
 		makeEvent(hServSock, newEvent, FD_READ);
 		//do sth,i.e. send a fisrt message to server
 
-		looprecvsend(hServSock, newEvent, netevent, msg, sizeof(msg));
+		looprecvsend();
 	}
 	else
 	{
@@ -42,62 +42,73 @@ SocketThread::SocketThread(SocketMediator* mediator, ADDRESS_FAMILY sin_family, 
 		if (::bind(loopsock, (SOCKADDR*)&loopAdr, sizeof(loopAdr)) == SOCKET_ERROR)
 		{
 			ErrorHandling("bind error\n");
-			return;
+			return false;
 		}
 		if (::listen(loopsock, 5) == SOCKET_ERROR)
 		{
 			ErrorHandling("listen error\n");
-			return;
+			return false;
 		}
 		int clntAdrLen = sizeof(clntAdr);
 		hServSock = ::accept(loopsock, (SOCKADDR*)&clntAdr, &clntAdrLen);
 		if (hServSock == SOCKET_ERROR)
 		{
 			ErrorHandling("accept error\n");
-			return;
+			return false;
 		}
 		newEvent = WSACreateEvent();
 		makeEvent(hServSock, newEvent, FD_READ);
-		looprecvsend(hServSock, newEvent, netevent, msg, sizeof(msg));//wait for client connecting in
+		looprecvsend();//wait for client connecting in
 	}
-	return;
+	return true;
 }
 
-void SocketThread::sendData(const char * msg)
+void SocketManager::sendMessage(const char * msg)
 {
 	string msgStr(msg);
 	send(hServSock, msg, sizeof(msg), 0);
 }
 
-void SocketThread::reactToMessage(const char * msg, SocketMediator* mediator)
-{
-	mediator->processMsg(msg);
-}
 
-void SocketThread::looprecvsend(SOCKET&sock, WSAEVENT&event, WSANETWORKEVENTS&netevent, char*msg, int size)
+
+void SocketManager::looprecvsend()
 {// loop and proccess evnets
-	while (1)
+	while (m_connection)
 	{
-		WSAWaitForMultipleEvents(1, &event, false, WSA_INFINITE, FALSE);
-		WSAEnumNetworkEvents(sock, event, &netevent);
+		if (WSAWaitForMultipleEvents(1, &newEvent, false, 1000, FALSE) == WSA_WAIT_TIMEOUT)
+			continue;
+		WSAEnumNetworkEvents(hServSock, newEvent, &netevent);
 		if (netevent.iErrorCode[FD_READ_BIT] != 0)
 		{
 			ErrorHandling("read error\n");
-			break;
+			continue;
 		}
-		int strlen = recv(sock, msg, size, 0);
-		//string recstr(msg);
-		//do sth
-		reactToMessage(msg, _mediator);
+		recv(hServSock, msg, sizeof(msg), 0);
+		writeBuffer(msg);
+		memset(msg, 0, sizeof(msg));
 	}
+	closesocket(hServSock);
 }
 
-SOCKET & SocketThread::getsocket()
+list<string> SocketManager::readBuffer()
+{
+	lock_guard<mutex> mtx(m_mtx);
+	return std::move(m_buffer);
+}
+
+void SocketManager::writeBuffer(char * message)
+{
+	string msg(message);
+	lock_guard<mutex> mtx(m_mtx);
+	m_buffer.push_back(msg);
+}
+
+SOCKET & SocketManager::getsocket()
 {
 	return hServSock;
 }
 
-SOCKADDR_IN SocketThread::getClient()
+SOCKADDR_IN SocketManager::getClient()
 {
 	return clntAdr;
 }

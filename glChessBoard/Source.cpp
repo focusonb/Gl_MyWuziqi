@@ -5,6 +5,7 @@
 #pragma comment(lib, "glfw3.lib")
 #endif
 #pragma comment(lib, "opengl32.lib")
+#include "Socket/socketManager.h"
 #include <glad/glad.h>
 #include <glfw3.h>
 #include <iostream>
@@ -30,7 +31,10 @@
 #include "Rule/WuziqiRule.h"
 #include "Rule/ChessMapData.h"
 #include "CallBack/mouse_click_callback.h"
-#include "CallBack/PosEvent.h"
+#include "CallBack/PosMessage.h"
+#include "ThirdParty/event/szevent.h"
+#include "eventHandle/ruleHandle.h"
+
 
 #include <thread>
 namespace sh {
@@ -39,9 +43,10 @@ namespace sh {
 	GlCirclePainter* ptrChessBlackPainter;
 	int chessCorlor;
 
-	PosEvent posEvent;
 	PlayChessHandle playChessHandle;
 }
+sz::event<PosMessage::MessageUnit> ruleEvnet;
+sz::event<GLFWwindow *, double, double> drawChessEvent;
 
 using std::cout;
 using std::endl;
@@ -51,9 +56,12 @@ int main()
 	ChessMapData chessMapData;
 	sh::playChessHandle.setMapData(&chessMapData);
 
+	ruleEvnet.add(ruleHandle);
+	drawChessEvent.add(handlePos);
 
-	std::thread analyze(&PosEvent::handle, &sh::posEvent);
-	//std::thread analyze(posEvent,&posEvent);
+	SocketManager socketConnection;
+	std::thread socketThread(&SocketManager::buidConnection, &socketConnection
+		, AF_INET, 0x7f000001, "8198");
 
 	std::thread boardLoopRender([&]() {
 		GlfwConfigure* myConfig = GlfwConfigure::getInstance();
@@ -98,7 +106,9 @@ int main()
 		GlPainter::deleteBuffers();
 		glfwTerminate();
 	});
+
 	boardLoopRender.join();
-	analyze.join();
+	socketConnection.close();
+	socketThread.join();
 	return 0;
 }
