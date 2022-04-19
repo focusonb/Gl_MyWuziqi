@@ -5,9 +5,8 @@
 class FileTextManager
 {
 public:
-	FileTextManager() :m_filePath()
+	FileTextManager(const char* filePath) :m_filePath(filePath)
 	{};
-	void setFilePath(const char* filePath);
 	virtual  char* outPut() = 0;
 	virtual ~FileTextManager() {};
 protected:
@@ -16,7 +15,7 @@ protected:
 class WFIleTextManager : public FileTextManager
 {
 public:
-	WFIleTextManager() :FileTextManager()
+	WFIleTextManager(const char* filePath) :FileTextManager(filePath)
 	{};
 	virtual ~WFIleTextManager();
 	char* outPut() override;

@@ -6,6 +6,8 @@
 #include "../ShaderReader/MyShader.h"
 #include "../TextureManager/TextureManager.h"
 #include "../GlfwConfigure//GlfwConfigure.h"
+#include "../ShaderReader/ShaderBuilder.h"
+
 
 #include <iostream>
 using std::cout;
@@ -79,16 +81,18 @@ static const double circleVertices[verticesNum] = {
 
 
 GlCirclePainter::GlCirclePainter(int widthWindow, int heightWindow, CorlorChess color)
-	:m_widthWindow(widthWindow), m_heightWindow(heightWindow)
+	:m_widthWindow(widthWindow), m_heightWindow(heightWindow), m_shaderManager(new ShaderBuilder(vertextShaderPath, fragmentShaderPath))
 {
+	m_myShader = m_shaderManager->getMyShader();
 	if (configureShader(color) == false) {
 		cout << "configureShader failed" << endl;
 	};
 }
 
 GlCirclePainter::GlCirclePainter(const PointGl& point, int width, CorlorChess color, int widthWindow, int heightWindow)
-	:m_widthWindow(widthWindow), m_heightWindow(heightWindow)
+	:m_widthWindow(widthWindow), m_heightWindow(heightWindow), m_shaderManager(new ShaderBuilder(vertextShaderPath, fragmentShaderPath))
 {
+	m_myShader = m_shaderManager->getMyShader();
 	addOne(point, width);
 	if (configureShader(color) == false) {
 		cout << "configureShader failed" << endl;
@@ -170,13 +174,15 @@ void GlCirclePainter::addOne(const PointGl& point, int width)
 
 bool GlCirclePainter::configureShader(CorlorChess color)
 {
-	MyShader myShader(vertextShaderPath, fragmentShaderPath);
+	if (m_myShader->configure() == false)
+		return false;
 
 	//get shader program
-	shaderProgram = myShader.getShaderProgram();
+	shaderProgram = m_myShader->getShaderProgram();
+	glEnable(GL_DEPTH_TEST);
+	glUseProgram(shaderProgram);
 
-	TextureManager textureManager;
-	textureManager.setChannelType(GL_RGB);
+	TextureManager textureManager(GL_RGB);
 	switch (color) {
 		case CorlorChess::white: {
 			textureManager.loadImage(MY_IMAGE_PATH_1, texture1);
@@ -192,9 +198,5 @@ bool GlCirclePainter::configureShader(CorlorChess color)
 	// -------------------------------------------------------------------------------------------
 	// either set it manually like so:
 	glUniform1i(glGetUniformLocation(shaderProgram, texture), 0);
-	glEnable(GL_DEPTH_TEST);
-	if (shaderProgram == 0) {
-		return false;
-	}
 	return true;
 }

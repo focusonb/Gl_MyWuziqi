@@ -1,9 +1,13 @@
 #pragma once
 #include "glSquarePainter.h"
+#include "../ShaderReader/MyShader.h"
+
+#include <memory>
+using std::unique_ptr;
 
 enum class CorlorChess { white,black};
 
-
+class ShaderBuilder;
 
 class GlCirclePainter : public GlPainter
 {
@@ -14,6 +18,9 @@ public:
 	void setWindowSize(const int widthWindow, const int heightWindow);
 	void setSize(const int& size) override {};
 	void addOne(const PointGl& point, int width);
+	~GlCirclePainter(){
+		delete m_shaderManager;
+	}
 protected:
 	bool configureShader(CorlorChess color);
 
@@ -27,4 +34,7 @@ private:
 
 	list<GLuint> m_vao;
 	list<GLuint> m_vao1;
+
+	ShaderBuilder* m_shaderManager;
+	unique_ptr<MyShader> m_myShader;
 };

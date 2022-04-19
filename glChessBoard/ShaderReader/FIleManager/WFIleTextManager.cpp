@@ -58,7 +58,3 @@ WFIleTextManager::~WFIleTextManager()
 	}
 }
 
-void FileTextManager::setFilePath(const char * filePath)
-{
-	m_filePath = filePath;
-}

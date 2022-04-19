@@ -6,6 +6,8 @@
 #include "../ShaderReader/MyShader.h"
 #include "../TextureManager/TextureManager.h"
 #include "../GlfwConfigure//GlfwConfigure.h"
+#include "../ShaderReader/ShaderBuilder.h"
+
 
 #include <iostream>
 using std::cout;
@@ -39,15 +41,23 @@ static float outSquareVertices[] = {
 };
 
 
-GlSquarePainter::GlSquarePainter()
+GlSquarePainter::GlSquarePainter():
+	m_shaderManager(new ShaderBuilder(vertextShaderPath, fragmentShaderPath)),
+	m_shaderManager2(new ShaderBuilder(vertextShaderPath2, fragmentShaderPath2))
 {
+	m_myShader = m_shaderManager->getMyShader();
+	m_myShader2 = m_shaderManager2->getMyShader();
 	if (configureShader() == false) {
 		cout << "configureShader failed" << endl;
 	};
 }
 
-GlSquarePainter::GlSquarePainter(const PointGl& point, int width)
+GlSquarePainter::GlSquarePainter(const PointGl& point, int width):
+	m_shaderManager(new ShaderBuilder(vertextShaderPath, fragmentShaderPath)),
+	m_shaderManager2(new ShaderBuilder(vertextShaderPath2, fragmentShaderPath2))
 {
+	m_myShader = m_shaderManager->getMyShader();
+	m_myShader2 = m_shaderManager2->getMyShader();
 	addOne(point, width);
 	if (configureShader() == false) {
 		cout << "configureShader failed" << endl;
@@ -160,22 +170,28 @@ void GlSquarePainter::addOne(const PointGl& point, int width)
 
 bool GlSquarePainter::configureShader()
 {
-	MyShader myShader(vertextShaderPath, fragmentShaderPath);
-	MyShader myShader2(vertextShaderPath2, fragmentShaderPath2);
+	if (m_myShader->configure() == false)
+		return false;
 
 	//get shader program
-	shaderProgram = myShader.getShaderProgram();
-	shaderProgramOutSquare = myShader2.getShaderProgram();
+	shaderProgram = m_myShader->getShaderProgram();
 
-	TextureManager textureManager;
-	textureManager.setChannelType(GL_RGB);
+	if (m_myShader2->configure() == false)
+		return false;
+
+	//get shader program
+	shaderProgramOutSquare = m_myShader2->getShaderProgram();
+
+	TextureManager textureManager(GL_RGB);
 	textureManager.loadImage(MY_IMAGE_PATH_1, texture1);
 
 	// tell opengl for each sampler to which texture unit it belongs to (only has to be done once)
 	// -------------------------------------------------------------------------------------------
 	// either set it manually like so:
-	glUniform1i(glGetUniformLocation(shaderProgram, texture), 0);
+	glUseProgram(shaderProgram);
 	glEnable(GL_DEPTH_TEST);
+
+	glUniform1i(glGetUniformLocation(shaderProgram, texture), 0);
 	if (shaderProgram == 0 || shaderProgramOutSquare == 0) {
 		return false;
 	}

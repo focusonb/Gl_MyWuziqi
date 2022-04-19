@@ -5,13 +5,13 @@
 #include <iostream>
 
 //#include <glfw3.h>
-#include <glad/glad.h>
 
-TextureManager::TextureManager()
+TextureManager::TextureManager(int type)
+	:m_imageChannelType(type)
 {
 }
 
-bool TextureManager::loadImage(const char * path, unsigned int& textureId)
+bool TextureManager::loadImage(const char * path, unsigned int& textureId) const
 {
 	stbi_set_flip_vertically_on_load(true);
 	// texture 1
@@ -35,7 +35,7 @@ bool TextureManager::loadImage(const char * path, unsigned int& textureId)
 	}
 	else
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, _ImageChannelType, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, m_imageChannelType, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	stbi_image_free(data);
@@ -44,5 +44,5 @@ bool TextureManager::loadImage(const char * path, unsigned int& textureId)
 
 void TextureManager::setChannelType(int type)
 {
-	_ImageChannelType = type;
+	m_imageChannelType = type;
 }

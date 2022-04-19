@@ -169,6 +169,7 @@
     <ClInclude Include="ShaderReader\FIleManager\FileManagerControler.h" />
     <ClInclude Include="ShaderReader\FIleManager\WFIleTextManager.h" />
     <ClInclude Include="shaderReader\MyShader.h" />
+    <ClInclude Include="ShaderReader\ShaderBuilder.h" />
     <ClInclude Include="socket\CommonFunction.h" />
     <ClInclude Include="socket\socketManager.h" />
     <ClInclude Include="socket\socketMediator.h" />

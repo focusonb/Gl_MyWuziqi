@@ -1,12 +1,12 @@
 #include "FileManagerControler.h"
 #include "WFIleTextManager.h"
 
-FileManagerControler::FileManagerControler(FIleTextManager type)
+FileManagerControler::FileManagerControler(const char* filePath, FIleTextManager type)
 {
 	switch (type)
 	{
 	case FIleTextManager::Windows:
-		m_ptr_fileManager = new WFIleTextManager();
+		m_ptr_fileManager = new WFIleTextManager(filePath);
 	}
 }
 
@@ -20,7 +20,3 @@ FileManagerControler::~FileManagerControler()
 	delete m_ptr_fileManager;
 }
 
-const char * FileManagerControler::outPut()
-{
-	return m_ptr_fileManager->outPut();
-}

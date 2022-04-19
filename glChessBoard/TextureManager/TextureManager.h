@@ -1,12 +1,12 @@
 #pragma once
-
+#include <glad/glad.h>
 class TextureManager
 {
 public:
-	TextureManager();
-	bool loadImage(const char* path, unsigned int& textureId);
+	TextureManager(int type);
+	bool loadImage(const char* path, unsigned int& textureId) const;
 	void setChannelType(int type);
 private:
-	int _ImageChannelType;
+	int m_imageChannelType;
 };
 
