@@ -21,21 +21,21 @@ private:
 	SOCKET hServSock;
 	WSAEVENT newEvent;
 	WSANETWORKEVENTS netevent;
-	char* msg;
+	char msg[1000];
 	list<string> m_buffer;
 	mutex m_mtx;
 	bool stopwait = true;
 	volatile bool m_connection;
 
 public:
-	SocketManager():msg(new char[1000]), m_connection(true){};
+	SocketManager(): m_connection(true){};
 	bool buidConnection(ADDRESS_FAMILY sin_family,
 		u_long address, 
 		const char* port);
 	~SocketManager() {
-		delete msg;
+		//delete msg;
 	};
-	void sendMessage(const char* msg);//input
+	void sendMessage(const string& str);//input
 	void close() { m_connection = false; }
 	list<string> readBuffer();
 private:

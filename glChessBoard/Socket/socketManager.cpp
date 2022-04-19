@@ -6,6 +6,8 @@
 #include "CommonFunction.h"
 #include "socketMediator.h"
 
+#include <iostream>
+
 using std::string;
 
 bool SocketManager::buidConnection( ADDRESS_FAMILY sin_family, u_long address, const char* port)
@@ -36,9 +38,9 @@ bool SocketManager::buidConnection( ADDRESS_FAMILY sin_family, u_long address, c
 	{
 		SOCKET loopsock = socket(PF_INET, SOCK_STREAM, 0);
 		memset(&loopAdr, 0, sizeof(loopAdr));
-		loopAdr.sin_family = AF_INET;
+		loopAdr.sin_family = sin_family;
 		loopAdr.sin_addr.s_addr = htonl(INADDR_ANY);
-		loopAdr.sin_port = htons(atoi("9198"));
+		loopAdr.sin_port = htons(atoi(port));
 		if (::bind(loopsock, (SOCKADDR*)&loopAdr, sizeof(loopAdr)) == SOCKET_ERROR)
 		{
 			ErrorHandling("bind error\n");
@@ -63,10 +65,9 @@ bool SocketManager::buidConnection( ADDRESS_FAMILY sin_family, u_long address, c
 	return true;
 }
 
-void SocketManager::sendMessage(const char * msg)
+void SocketManager::sendMessage(const string& str)
 {
-	string msgStr(msg);
-	send(hServSock, msg, sizeof(msg), 0);
+	send(hServSock, str.c_str(), str.size(), 0);
 }
 
 
@@ -75,6 +76,7 @@ void SocketManager::looprecvsend()
 {// loop and proccess evnets
 	while (m_connection)
 	{
+		std::cout << "enter loop" << std::endl;
 		if (WSAWaitForMultipleEvents(1, &newEvent, false, 1000, FALSE) == WSA_WAIT_TIMEOUT)
 			continue;
 		WSAEnumNetworkEvents(hServSock, newEvent, &netevent);

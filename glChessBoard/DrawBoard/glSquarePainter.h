@@ -19,24 +19,6 @@ using std::vector;
 //};
 
 
-static float squareVertices[] = {
-	1.0f, -1.0f, 0.0f,  1.0f, 0.0f,	//right down
-	-1.0f, -1.0f, 0.0f,  0.0f, 0.0f,	//left down
-	-1.0f, 1.0f, 0.0f,  0.0f, 1.0f,	//left up
-	1.0f, 1.0f, 0.0f,  1.0f, 1.0f,	//right up
-	1.0f, -1.0f, 0.0f,  1.0f, 0.0f,	//right down
-	-1.0f, 1.0f, 0.0f,  0.0f, 1.0f,	//left up
-};
-
-static float outSquareVertices[] = {
-		0.9f, -0.9f, -0.1f,  0.0f, 255.0f,60.0f,	//right down
-	-0.9f, -0.9f, -0.1f,  0.0f, 255.0f,60.0f,	//left down
-	-0.9f,  0.9f, -0.1f,  0.0f, 255.0f,60.0f,	//left up
-	0.9f,  0.9f, -0.1f,  0.0f, 255.0f,60.0f,	//right up
-	0.9f, -0.9f, -0.1f,  0.0f, 255.0f,60.0f,	//right down
-	-0.9f,  0.9f, -0.1f,  0.0f, 255.0f,60.0f,	//left up
-};
-
 extern struct GLFWwindow;
 
 class GlSquarePainter : public GlPainter
